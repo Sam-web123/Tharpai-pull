@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tharpai Pull – Sacred Grass</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fdf8f0;
+      color: #3b2a1a;
+    }
+
+    /* ── Hero / Header ── */
+    header {
+      background: linear-gradient(135deg, #2d6a2d 0%, #4caf50 60%, #a5d6a7 100%);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Desmostachya_bipinnata_W_IMG_2376.jpg/1280px-Desmostachya_bipinnata_W_IMG_2376.jpg') center/cover no-repeat;
+      opacity: 0.18;
+    }
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      position: relative;
+    }
+    header p.tagline {
+      font-size: 1.2rem;
+      margin-top: 12px;
+      opacity: 0.92;
+      position: relative;
+    }
+    .since-badge {
+      display: inline-block;
+      margin-top: 18px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 30px;
+      padding: 6px 20px;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      position: relative;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: #1b4d1b;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 14px 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: #c8e6c9;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #fff; }
+
+    /* ── Sections ── */
+    section {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    section h2 {
+      font-size: 1.9rem;
+      color: #2d6a2d;
+      margin-bottom: 16px;
+      border-left: 5px solid #4caf50;
+      padding-left: 14px;
+    }
+    section p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #4a3728;
+    }
+
+    /* ── Image Gallery ── */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 28px;
+    }
+    .gallery figure {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+      background: #fff;
+    }
+    .gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .gallery figure:hover img { transform: scale(1.04); }
+    .gallery figcaption {
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      color: #666;
+      text-align: center;
+    }
+
+    /* ── Import / Export Cards ── */
+    .trade-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 28px;
+    }
+    @media (max-width: 600px) { .trade-cards { grid-template-columns: 1fr; } }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.09);
+      border-top: 5px solid #4caf50;
+      text-align: center;
+    }
+    .card .icon { font-size: 2.8rem; margin-bottom: 12px; }
+    .card h3 { font-size: 1.3rem; color: #2d6a2d; margin-bottom: 10px; }
+    .card p { font-size: 0.97rem; line-height: 1.7; color: #555; }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 2px dashed #c8e6c9;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* ── Product Cards ── */
+    .product-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 32px;
+    }
+    @media (max-width: 640px) { .product-cards { grid-template-columns: 1fr; } }
+    .product-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    }
+    .product-card-header {
+      padding: 28px 24px 20px;
+      text-align: center;
+    }
+    .product-card-header .prod-icon { font-size: 3rem; margin-bottom: 10px; }
+    .product-card-header h3 {
+      font-size: 1.45rem;
+      color: #1b4d1b;
+      margin-bottom: 6px;
+    }
+    .product-card-header .prod-tag {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2d6a2d;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .product-card-body {
+      padding: 0 24px 28px;
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: #555;
+    }
+    .product-card-body ul {
+      list-style: none;
+      margin-top: 14px;
+    }
+    .product-card-body ul li {
+      padding: 5px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .product-card-body ul li::before {
+      content: '✦ ';
+      color: #4caf50;
+      font-size: 0.8rem;
+    }
+    .product-card-footer {
+      padding: 16px 24px 24px;
+      text-align: center;
+    }
+    .btn-order-small {
+      background: #2d6a2d;
+      color: #fff;
+      border: none;
+      padding: 11px 30px;
+      font-size: 0.97rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-order-small:hover { background: #1b4d1b; transform: translateY(-2px); }
+    .product-card.stabanam { border-top: 5px solid #ff9800; }
+    .product-card.jagasali  { border-top: 5px solid #7b1fa2; }
+    .product-card.tharpaipai { border-top: 5px solid #c62828; }
+    .product-card.pavirtham  { border-top: 5px solid #0277bd; }
+    .product-card.stabanam .product-card-header .prod-tag  { background: #fff3e0; color: #e65100; }
+    .product-card.jagasali  .product-card-header .prod-tag  { background: #f3e5f5; color: #6a1b9a; }
+    .product-card.tharpaipai .product-card-header .prod-tag { background: #ffebee; color: #b71c1c; }
+    .product-card.pavirtham  .product-card-header .prod-tag { background: #e1f5fe; color: #01579b; }
+    .product-card.stabanam  .btn-order-small { background: #e65100; }
+    .product-card.stabanam  .btn-order-small:hover { background: #bf360c; }
+    .product-card.jagasali  .btn-order-small { background: #6a1b9a; }
+    .product-card.jagasali  .btn-order-small:hover { background: #4a148c; }
+    .product-card.tharpaipai .btn-order-small { background: #c62828; }
+    .product-card.tharpaipai .btn-order-small:hover { background: #8e0000; }
+    .product-card.pavirtham  .btn-order-small { background: #0277bd; }
+    .product-card.pavirtham  .btn-order-small:hover { background: #01579b; }
+
+    /* ── Order Section ── */
+    .order-section {
+      text-align: center;
+      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      border-radius: 18px;
+      padding: 50px 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+    .order-section h2 {
+      border: none;
+      padding-left: 0;
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    .order-section p {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 30px;
+    }
+    .btn-order {
+      background: #2d6a2d;
+      color: #fff;
+      border: none;
+      padding: 16px 44px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      box-shadow: 0 6px 20px rgba(45,106,45,0.35);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-order:hover { background: #1b4d1b; transform: translateY(-2px); }
+
+    /* ── Phone Popup ── */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .popup-overlay.active { display: flex; }
+    .popup-box {
+      background: #fff;
+      border-radius: 18px;
+      padding: 40px 36px;
+      text-align: center;
+      max-width: 360px;
+      width: 90%;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+      animation: popIn 0.25s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .popup-box .phone-icon { font-size: 3rem; margin-bottom: 14px; }
+    .popup-box h3 { font-size: 1.3rem; color: #2d6a2d; margin-bottom: 8px; }
+    .popup-box p  { font-size: 0.97rem; color: #666; margin-bottom: 18px; }
+    .popup-box .phone-number {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1b4d1b;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 22px;
+    }
+    .popup-box a.call-btn {
+      display: inline-block;
+      background: #4caf50;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      transition: background 0.2s;
+    }
+    .popup-box a.call-btn:hover { background: #2d6a2d; }
+    .popup-box button.close-btn {
+      display: block;
+      margin: 0 auto;
+      background: none;
+      border: none;
+      color: #999;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .popup-box button.close-btn:hover { color: #555; }
+
+    /* ── Footer ── */
+    footer {
+      background: #1b4d1b;
+      color: #a5d6a7;
+      text-align: center;
+      padding: 28px 20px;
+      margin-top: 60px;
+      font-size: 0.92rem;
+    }
+    footer span { color: #fff; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+  <header>
+    <h1>🌿 Tharpai Pull</h1>
+    <p class="tagline">The Sacred Grass of Hindu Rituals — Pure, Authentic &amp; Trusted</p>
+    <div class="since-badge">✦ Since 2021 ✦</div>
+  </header>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#products">Our Products</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#trade">Import &amp; Export</a>
+    <a href="#order">Order Now</a>
+  </nav>
+
+  <!-- ══ ABOUT ══ -->
+  <section id="about">
+    <h2>What is Tharpai Pull?</h2>
+    <p>
+      <strong>Tharpai Pull</strong> (also known as <em>Darbha</em> or <em>Kusha grass</em> — 
+      <em>Desmostachya bipinnata</em>) is one of the most sacred grasses in Hindu tradition. 
+      Revered since Vedic times, it is an indispensable part of religious ceremonies including 
+      <em>Tarpan</em>, <em>Shradh</em>, <em>Homa</em>, and daily <em>Puja</em>. 
+      Its long, slender blades are believed to carry powerful purifying energy, 
+      connecting the devotee to the divine and to their ancestors.
+    </p>
+    <br />
+    <p>
+      Priests and devotees use Tharpai Pull to fashion sacred rings (<em>pavitri</em>), 
+      as a seat for idols, as an offering, and as a purifying mat during rituals. 
+      According to Ayurveda, the grass also holds cooling and detoxifying properties 
+      that promote mental clarity and spiritual well-being.
+    </p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══ OUR PRODUCTS ══ -->
+  <section id="products">
+    <h2>Our Products</h2>
+    <p>
+      We offer four specially prepared Tharpai Pull products, each crafted for a specific 
+      type of sacred ceremony — the <strong>Stabanam Set</strong> for daily Kovil Poojas, 
+      the <strong>Jagasali Set</strong> for Kumbabishagam, the <strong>Tharpai Paai</strong> 
+      for the flag hoisting festival, and <strong>Pavirtham</strong> used in all rituals 
+      for protection. Every product is carefully selected, cleaned, and packed to ensure 
+      ritual purity and authenticity.
+    </p>
+
+    <div class="product-cards">
+
+      <!-- Stabanam Set -->
+      <div class="product-card stabanam">
+        <div class="product-card-header">
+          <div class="prod-icon">🪔</div>
+          <div class="prod-tag">Daily Kovil Pooja</div>
+          <h3>Stabanam Set</h3>
+        </div>
+        <div class="product-card-body">
+          <p>
+            The <strong>Stabanam Set</strong> is designed for daily temple rituals and 
+            routine Kovil Poojas. It contains the essential Tharpai Pull needed for 
+            everyday worship, keeping the sacred space pure and the offerings sanctified.
+          </p>
+          <ul>
+            <li>Ideal for daily Kovil Poojas</li>
+            <li>Suitable for routine temple rituals</li>
+            <li>Carefully cleaned &amp; packed</li>
+            <li>Available for bulk &amp; retail orders</li>
+          </ul>
+        </div>
+        <div class="product-card-footer">
+          <button class="btn-order-small" onclick="openPopup()">📞 Order This Set</button>
+        </div>
+      </div>
+
+      <!-- Jagasali Set -->
+      <div class="product-card jagasali">
+        <div class="product-card-header">
+          <div class="prod-icon">🕌</div>
+          <div class="prod-tag">Kumbabishagam</div>
+          <h3>Jagasali Set</h3>
+        </div>
+        <div class="product-card-body">
+          <p>
+            The <strong>Jagasali Set</strong> is a premium, larger set prepared specifically 
+            for the grand <em>Kumbabishagam</em> ceremony — the sacred consecration ritual 
+            performed at temples. It includes all the Tharpai Pull required for this 
+            significant and auspicious occasion.
+          </p>
+          <ul>
+            <li>Specially prepared for Kumbabishagam</li>
+            <li>Premium quality &amp; larger quantity</li>
+            <li>Ritually pure &amp; authentic</li>
+            <li>Available for temple &amp; institution orders</li>
+          </ul>
+        </div>
+        <div class="product-card-footer">
+          <button class="btn-order-small" onclick="openPopup()">📞 Order This Set</button>
+        </div>
+      </div>
+
+      <!-- Tharpai Paai -->
+      <div class="product-card tharpaipai">
+        <div class="product-card-header">
+          <div class="prod-icon">🚩</div>
+          <div class="prod-tag">Flag Hoisting Festival</div>
+          <h3>Tharpai Paai</h3>
+        </div>
+        <div class="product-card-body">
+          <p>
+            <strong>Tharpai Paai</strong> is a specially woven cover made from Tharpai Pull,
+            used to wrap and cover the <em>Kodithambam</em> (the sacred flag post) in the Kovil.
+            This is an exclusive item used only during the grand flag hoisting festival
+            (<em>Kodiyetram</em>), making it a rare and deeply sacred offering.
+          </p>
+          <ul>
+            <li>Used to cover the Kodithambam (flag post)</li>
+            <li>Exclusively for flag hoisting festivals</li>
+            <li>Woven from pure Tharpai Pull</li>
+            <li>Available for temple orders</li>
+          </ul>
+        </div>
+        <div class="product-card-footer">
+          <button class="btn-order-small" onclick="openPopup()">📞 Order This Set</button>
+        </div>
+      </div>
+
+      <!-- Pavirtham -->
+      <div class="product-card pavirtham">
+        <div class="product-card-header">
+          <div class="prod-icon">🛡️</div>
+          <div class="prod-tag">All Rituals — Protection</div>
+          <h3>Pavirtham</h3>
+        </div>
+        <div class="product-card-body">
+          <p>
+            <strong>Pavirtham</strong> is an essential sacred item used across <em>all</em> Hindu
+            rituals. It acts as a protective shield for the ceremony, ensuring the ritual
+            remains pure, undisturbed, and spiritually protected from start to finish.
+            No pooja or ceremony is considered complete without it.
+          </p>
+          <ul>
+            <li>Used in all types of rituals &amp; poojas</li>
+            <li>Protects the ritual from being spoiled</li>
+            <li>Ensures purity &amp; sanctity throughout</li>
+            <li>Available for bulk &amp; retail orders</li>
+          </ul>
+        </div>
+        <div class="product-card-footer">
+          <button class="btn-order-small" onclick="openPopup()">📞 Order This Set</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+
+      <figure>
+        <img
+          src="https://raw.githubusercontent.com/Sam-web123/Tharpai-pull/main/WhatsApp%20Image%202026-05-14%20at%209.49.54%20PM.jpeg"
+          alt="Tharpai Pull products arranged in a circle"
+          loading="lazy"
+        />
+        <figcaption>Our Tharpai Pull sets — beautifully arranged and ready for rituals</figcaption>
+      </figure>
+
+      <figure>
+        <img
+          src="https://raw.githubusercontent.com/Sam-web123/Tharpai-pull/main/WhatsApp%20Image%202026-05-14%20at%209.50.14%20PM.jpeg"
+          alt="Tharpai Pull sets displayed in a fan arrangement"
+          loading="lazy"
+        />
+        <figcaption>A full range of our Tharpai Pull sets including Stabanam and Jagasali</figcaption>
+      </figure>
+
+      <figure>
+        <img
+          src="https://raw.githubusercontent.com/Sam-web123/Tharpai-pull/main/WhatsApp%20Image%202026-05-14%20at%209.52.54%20PM.jpeg"
+          alt="Decorated Pavirtham sets with colourful ornaments"
+          loading="lazy"
+        />
+        <figcaption>Decorated Pavirtham sets — used for protection in all sacred rituals</figcaption>
+      </figure>
+
+    </div>
+    <p style="margin-top:14px; font-size:0.85rem; color:#888;">
+      Our own product images. More photos coming soon.
+    </p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══ IMPORT / EXPORT ══ -->
+  <section id="trade">
+    <h2>Import &amp; Export</h2>
+    <p>
+      We are proud to serve devotees and religious institutions worldwide. 
+      Whether you need Tharpai Pull sourced from trusted local farms or 
+      delivered to temples and communities across the globe, we have you covered.
+    </p>
+    <div class="trade-cards">
+      <div class="card">
+        <div class="icon">🚢</div>
+        <h3>Import</h3>
+        <p>
+          We import premium quality Tharpai Pull into the country, 
+          ensuring every batch meets the highest standards of purity 
+          and ritual authenticity. Fresh, clean, and ready for use 
+          in all sacred ceremonies.
+        </p>
+      </div>
+      <div class="card">
+        <div class="icon">✈️</div>
+        <h3>Export</h3>
+        <p>
+          We export Tharpai Pull to Hindu communities, temples, and 
+          religious organisations in countries around the world. 
+          Carefully packed and shipped to preserve freshness and 
+          sanctity throughout the journey.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══ ORDER ══ -->
+  <section id="order">
+    <div class="order-section">
+      <h2>🛒 Place Your Order</h2>
+      <p>
+        Ready to order Tharpai Pull? Tap the button below to get our contact number 
+        and speak directly with us for bulk or retail orders.
+      </p>
+      <button class="btn-order" onclick="openPopup()">📞 Order Now</button>
+    </div>
+  </section>
+
+  <!-- ══ PHONE POPUP ══ -->
+  <div class="popup-overlay" id="popupOverlay" onclick="closeOnOverlay(event)">
+    <div class="popup-box">
+      <div class="phone-icon">📞</div>
+      <h3>Call Us to Order</h3>
+      <p>Our team is ready to assist you with your order.</p>
+      <span class="phone-number">+94 77 190 6576</span>
+      <a class="call-btn" href="tel:+94771906576">📲 Call Now</a>
+      <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <p>© 2026 <span>Amson Marketing</span>. All rights reserved.</p>
+    <p style="margin-top:6px; opacity:0.75;">Serving devotees with pure Tharpai Pull since 2021.</p>
+  </footer>
+
+  <script>
+    function openPopup() {
+      document.getElementById('popupOverlay').classList.add('active');
+    }
+    function closePopup() {
+      document.getElementById('popupOverlay').classList.remove('active');
+    }
+    function closeOnOverlay(e) {
+      if (e.target === document.getElementById('popupOverlay')) closePopup();
+    }
+    // Close with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePopup();
+    });
+  </script>
+
+</body>
+</html>
